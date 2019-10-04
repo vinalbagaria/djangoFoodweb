@@ -17,14 +17,24 @@
 		<li><a href= "{% url 'food-order' %}">FOOD DELIVERY</a></li>
 		<li><a href="{% url 'food-order' %}">FOOD ORDER</a></li>
 		<li><a href="{% url 'index' %}">TESTIMONIALS</a></li>
-		<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>   LOGIN</a></li>
-		<li><a href="{% url 'register' %}">SIGN-UP</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOG-OUT</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>   LOGIN</a></li>
+            <li><a href="{% url 'register' %}">SIGN-UP</a></li>
+        {% endif %}
         <li><a href="{% url 'index' %}"><i class="fa fa-facebook" ></i></a></li>
     </ul>
 	</div>
 	<div class="hero">
 
-
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}"></div>
+                {{ message }}
+            {% endfor %}
+        {% endif %}
 		<h1>GOODBYE JUNKFOOD <br> HELLO SUPER HEALTHY MEALS</h1>
 		<div class="button-awesome">
 		<a href="" class="btn btn-half">Show me more</a>
